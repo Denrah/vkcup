@@ -1,0 +1,8 @@
+/* 
+  Localizable.strings
+  VKCup
+*/
+
+"common.close" = "Закрыть";
+
+"login.button.title" = "Войти через VK";
