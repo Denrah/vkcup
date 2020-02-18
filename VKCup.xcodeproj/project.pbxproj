@@ -15,6 +15,8 @@
 		844CBF4723F83DD300E334AA /* VKService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844CBF4623F83DD300E334AA /* VKService.swift */; };
 		844CBF4923F83DF800E334AA /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844CBF4823F83DF800E334AA /* AppDependency.swift */; };
 		844CBF4B23F8402700E334AA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844CBF4A23F8402700E334AA /* BaseViewController.swift */; };
+		844CBF4E23FAFC7B00E334AA /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844CBF4D23FAFC7B00E334AA /* ShareViewController.swift */; };
+		844CBF5023FB007900E334AA /* ShareCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844CBF4F23FB007900E334AA /* ShareCoordinator.swift */; };
 		848AED3523F7DEC700C9BC60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848AED3423F7DEC700C9BC60 /* AppDelegate.swift */; };
 		848AED3E23F7DED700C9BC60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 848AED3D23F7DED700C9BC60 /* Assets.xcassets */; };
 		848AED4123F7DED700C9BC60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 848AED3F23F7DED700C9BC60 /* LaunchScreen.storyboard */; };
@@ -37,6 +39,8 @@
 		844CBF4623F83DD300E334AA /* VKService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKService.swift; sourceTree = "<group>"; };
 		844CBF4823F83DF800E334AA /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
 		844CBF4A23F8402700E334AA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		844CBF4D23FAFC7B00E334AA /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		844CBF4F23FB007900E334AA /* ShareCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCoordinator.swift; sourceTree = "<group>"; };
 		848AED3123F7DEC700C9BC60 /* VKCup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKCup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		848AED3423F7DEC700C9BC60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		848AED3D23F7DED700C9BC60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -95,6 +99,15 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		844CBF4C23FAFC6100E334AA /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				844CBF4D23FAFC7B00E334AA /* ShareViewController.swift */,
+				844CBF4F23FB007900E334AA /* ShareCoordinator.swift */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
 		848AED2823F7DEC700C9BC60 = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +163,7 @@
 		84D554AE23F7E122001617C1 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				844CBF4C23FAFC6100E334AA /* Share */,
 				844CBF3823F8038000E334AA /* Auth */,
 				84D554B423F7E699001617C1 /* Base */,
 			);
@@ -325,11 +339,13 @@
 				84D554BB23F7EE04001617C1 /* StandardButton.swift in Sources */,
 				848AED3523F7DEC700C9BC60 /* AppDelegate.swift in Sources */,
 				84D554B823F7EA77001617C1 /* UIColor+AppColors.swift in Sources */,
+				844CBF4E23FAFC7B00E334AA /* ShareViewController.swift in Sources */,
 				84D554B623F7E6C5001617C1 /* MainCoordinator.swift in Sources */,
 				844CBF4B23F8402700E334AA /* BaseViewController.swift in Sources */,
 				844CBF4723F83DD300E334AA /* VKService.swift in Sources */,
 				844CBF4123F806C700E334AA /* AuthViewModel.swift in Sources */,
 				844CBF3F23F8055000E334AA /* AuthCoordinator.swift in Sources */,
+				844CBF5023FB007900E334AA /* ShareCoordinator.swift in Sources */,
 				844CBF3A23F803AB00E334AA /* AuthViewController.swift in Sources */,
 				84D554B323F7E2D9001617C1 /* BaseCoordinator.swift in Sources */,
 				844CBF4423F8135600E334AA /* Constants.swift in Sources */,

@@ -3,6 +3,16 @@
   VKCup
 */
 
+// MARK: - Common
+
 "common.close" = "Закрыть";
 
+// MARK: - Auth
+
 "login.button.title" = "Войти через VK";
+
+// MARK: - Share
+
+"title.label.text" = "Делитесь фотографиями";
+"subtitle.label.text" = "Поделитесь фотографией на стене,\nи добавьте к ней описание.";
+"select.photo.button.title" = "Выбрать фото";

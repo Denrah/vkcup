@@ -22,12 +22,18 @@ class MainCoordinator: BaseCoordinator {
     
     func start() {
         window.makeKeyAndVisible()
-        showAuthScreen()
+        showShareScreen()
     }
     
     func showAuthScreen() {
         let coordinator = AuthCoordinator(navigationController: rootNavigationController,
                                           appDependency: appDependency)
+        add(coordinator: coordinator)
+        coordinator.start()
+    }
+    
+    func showShareScreen() {
+        let coordinator = ShareCoordinator(navigationController: rootNavigationController)
         add(coordinator: coordinator)
         coordinator.start()
     }
