@@ -16,3 +16,5 @@
 "title.label.text" = "Делитесь фотографиями";
 "subtitle.label.text" = "Поделитесь фотографией на стене,\nи добавьте к ней описание.";
 "select.photo.button.title" = "Выбрать фото";
+"bottom.sheet.title" = "Поделиться на стене";
+"send.button.title" = "Отправить";

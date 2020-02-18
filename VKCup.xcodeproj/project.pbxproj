@@ -25,6 +25,11 @@
 		84D554B823F7EA77001617C1 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D554B723F7EA77001617C1 /* UIColor+AppColors.swift */; };
 		84D554BB23F7EE04001617C1 /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D554BA23F7EE04001617C1 /* StandardButton.swift */; };
 		DD14ED40A803154F48018E37 /* Pods_VKCup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B106B5D82C144831494507 /* Pods_VKCup.framework */; };
+		F7B5448D23FBA2C1003AE545 /* SharingBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5448C23FBA2C1003AE545 /* SharingBottomSheet.swift */; };
+		F7B5448F23FBB0AD003AE545 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5448E23FBB0AD003AE545 /* TextView.swift */; };
+		F7B5449123FBBAD5003AE545 /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5449023FBBAD5003AE545 /* ImagePickerCoordinator.swift */; };
+		F7B5449423FBBBFE003AE545 /* ShareViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5449323FBBBFE003AE545 /* ShareViewModel.swift */; };
+		F7B5449623FBCD88003AE545 /* SharingBottomSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5449523FBCD88003AE545 /* SharingBottomSheetViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +55,11 @@
 		84D554B523F7E6C5001617C1 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		84D554B723F7EA77001617C1 /* UIColor+AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
 		84D554BA23F7EE04001617C1 /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
+		F7B5448C23FBA2C1003AE545 /* SharingBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingBottomSheet.swift; sourceTree = "<group>"; };
+		F7B5448E23FBB0AD003AE545 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		F7B5449023FBBAD5003AE545 /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
+		F7B5449323FBBBFE003AE545 /* ShareViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewModel.swift; sourceTree = "<group>"; };
+		F7B5449523FBCD88003AE545 /* SharingBottomSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingBottomSheetViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +112,8 @@
 		844CBF4C23FAFC6100E334AA /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				F7B5449223FBBBF2003AE545 /* View Models */,
+				F7B5448B23FBA293003AE545 /* Views */,
 				844CBF4D23FAFC7B00E334AA /* ShareViewController.swift */,
 				844CBF4F23FB007900E334AA /* ShareCoordinator.swift */,
 			);
@@ -166,6 +178,7 @@
 				844CBF4C23FAFC6100E334AA /* Share */,
 				844CBF3823F8038000E334AA /* Auth */,
 				84D554B423F7E699001617C1 /* Base */,
+				F7B5449023FBBAD5003AE545 /* ImagePickerCoordinator.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -199,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				84D554BA23F7EE04001617C1 /* StandardButton.swift */,
+				F7B5448E23FBB0AD003AE545 /* TextView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -218,6 +232,23 @@
 				2C2B7279C02C802EBD720F53 /* Pods-VKCup.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F7B5448B23FBA293003AE545 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F7B5448C23FBA2C1003AE545 /* SharingBottomSheet.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F7B5449223FBBBF2003AE545 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				F7B5449323FBBBFE003AE545 /* ShareViewModel.swift */,
+				F7B5449523FBCD88003AE545 /* SharingBottomSheetViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,14 +366,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7B5448D23FBA2C1003AE545 /* SharingBottomSheet.swift in Sources */,
 				844CBF4923F83DF800E334AA /* AppDependency.swift in Sources */,
 				84D554BB23F7EE04001617C1 /* StandardButton.swift in Sources */,
 				848AED3523F7DEC700C9BC60 /* AppDelegate.swift in Sources */,
 				84D554B823F7EA77001617C1 /* UIColor+AppColors.swift in Sources */,
 				844CBF4E23FAFC7B00E334AA /* ShareViewController.swift in Sources */,
+				F7B5449423FBBBFE003AE545 /* ShareViewModel.swift in Sources */,
 				84D554B623F7E6C5001617C1 /* MainCoordinator.swift in Sources */,
 				844CBF4B23F8402700E334AA /* BaseViewController.swift in Sources */,
+				F7B5449123FBBAD5003AE545 /* ImagePickerCoordinator.swift in Sources */,
+				F7B5449623FBCD88003AE545 /* SharingBottomSheetViewModel.swift in Sources */,
 				844CBF4723F83DD300E334AA /* VKService.swift in Sources */,
+				F7B5448F23FBB0AD003AE545 /* TextView.swift in Sources */,
 				844CBF4123F806C700E334AA /* AuthViewModel.swift in Sources */,
 				844CBF3F23F8055000E334AA /* AuthCoordinator.swift in Sources */,
 				844CBF5023FB007900E334AA /* ShareCoordinator.swift in Sources */,
