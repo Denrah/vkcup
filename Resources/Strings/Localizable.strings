@@ -3,6 +3,14 @@
   VKCup
 */
 
+// MARK: - Auth
+
 "common.close" = "Закрыть";
 
+// MARK: - Auth
+
 "login.button.title" = "Войти через VK";
+
+// MARK: - Search
+
+"title.button.text" = "Магазины в Санкт-Петербурге";
