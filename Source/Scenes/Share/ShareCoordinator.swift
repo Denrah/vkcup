@@ -13,9 +13,11 @@ class ShareCoordinator: BaseCoordinator {
   var onDidSelectImage: ((UIImage) -> Void)?
   
   private var navigationController: UINavigationController
+  private let appDependency: AppDependency
   
-  init(navigationController: UINavigationController) {
+  init(navigationController: UINavigationController, appDependency: AppDependency) {
     self.navigationController = navigationController
+    self.appDependency = appDependency
   }
   
   func start() {
@@ -23,7 +25,7 @@ class ShareCoordinator: BaseCoordinator {
   }
   
   private func showShareScreen() {
-    let viewModel = ShareViewModel()
+    let viewModel = ShareViewModel(dependencies: appDependency)
     viewModel.delegate = self
     
     onDidSelectImage = { [weak viewModel] image in
@@ -32,7 +34,7 @@ class ShareCoordinator: BaseCoordinator {
     
     let viewController = ShareViewController(viewModel: viewModel)
     navigationController.setNavigationBarHidden(true, animated: false)
-    navigationController.pushViewController(viewController, animated: false)
+    navigationController.pushViewController(viewController, animated: true)
   }
   
   private func showImagePicker() {

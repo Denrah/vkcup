@@ -4,28 +4,38 @@
 //
 
 import UIKit
+import SnapKit
 
 class ShareViewController: UIViewController {
   // MARK: - Subviews
   
   private let descriptionContainerView = UIView()
+  private let iconImageView = UIImageView()
   private let titleLabel = UILabel()
   private let subtitleLabel = UILabel()
   private let selectPhotoButton = StandardButton()
   private let overlayView = UIView()
+  private let activityIndicator = UIActivityIndicatorView(style: .gray)
   private let bottomSheetGapView = UIView()
-  private let bottomSheet = SharingBottomSheet()
+  private let bottomSheet: SharingBottomSheet
+  
+  private var bottomSheetBottomConstraint: Constraint?
   
   // MARK: - Properties
   
   private let viewModel: ShareViewModel
   
   private var isBottomSheetOpened = false
+  private var bottomSheetFrameObserver: NSKeyValueObservation?
   
   // MARK: - Lifecycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
+                                           name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
+                                           name: UIResponder.keyboardWillHideNotification, object: nil)
     setup()
   }
   
@@ -33,6 +43,7 @@ class ShareViewController: UIViewController {
   
   init(viewModel: ShareViewModel) {
     self.viewModel = viewModel
+    bottomSheet = SharingBottomSheet(viewModel: viewModel.sharingBottomSheetViewModel)
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -45,11 +56,13 @@ class ShareViewController: UIViewController {
   private func setup() {
     view.backgroundColor = .base1
     addDescriptionContainer()
+    addIcon()
     addTitle()
     addSubtitle()
     addSelectPhotoButton()
     addBottomSheet()
     bindToViewModel()
+    addActivityIndicator()
   }
   
   private func addDescriptionContainer() {
@@ -62,6 +75,20 @@ class ShareViewController: UIViewController {
     }
   }
   
+  private func addIcon() {
+    descriptionContainerView.addSubview(iconImageView)
+    
+    iconImageView.tintColor = .shade4
+    iconImageView.image = UIImage(named: "share")?.withRenderingMode(.alwaysTemplate)
+    iconImageView.contentMode = .scaleAspectFit
+    
+    iconImageView.snp.makeConstraints { make in
+      make.top.equalToSuperview().inset(48)
+      make.centerX.equalToSuperview()
+      make.width.height.equalTo(56)
+    }
+  }
+  
   private func addTitle() {
     descriptionContainerView.addSubview(titleLabel)
     
@@ -71,7 +98,7 @@ class ShareViewController: UIViewController {
     titleLabel.text = NSLocalizedString("title.label.text", comment: "Sharing title")
     
     titleLabel.snp.makeConstraints { make in
-      make.top.equalToSuperview().inset(116)
+      make.top.equalTo(iconImageView.snp.bottom).offset(12)
       make.leading.trailing.equalToSuperview().inset(16)
     }
   }
@@ -114,6 +141,20 @@ class ShareViewController: UIViewController {
     overlayView.isHidden = true
     overlayView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeBottomSheet)))
     
+    bottomSheetFrameObserver = bottomSheet.observe(\.center, options: .new) { [weak self] bottomSheet, _ in
+      guard let self = self else { return }
+      
+      var topInset: CGFloat = 0
+      
+      if #available(iOS 11.0, *) {
+        topInset = self.view.safeAreaInsets.top
+      }
+      
+      if topInset == bottomSheet.frame.origin.y {
+        self.viewModel.lockBottomSheetCommentTextView()
+      }
+    }
+    
     bottomSheetGapView.backgroundColor = .base1
     
     overlayView.snp.makeConstraints { make in
@@ -132,11 +173,53 @@ class ShareViewController: UIViewController {
     }
   }
   
+  private func addActivityIndicator() {
+    view.addSubview(activityIndicator)
+    
+    activityIndicator.isHidden = true
+    
+    activityIndicator.snp.makeConstraints { make in
+      make.center.equalToSuperview()
+    }
+  }
+  
   // MARK: - Bind
   
   private func bindToViewModel() {
     viewModel.onDidSelectImage = { [weak self] image in
       self?.showBottomSheet()
+    }
+    
+    viewModel.onDidRequestToCloseBottomSheet = { [weak self] in
+      self?.hideBottomSheet()
+    }
+    
+    viewModel.onDidReceiveError = { [weak self] error in
+      let alert = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: NSLocalizedString("common.close", comment: "Close button title"),
+                                    style: .cancel, handler: nil))
+      self?.present(alert, animated: true, completion: nil)
+    }
+    
+    viewModel.onDidPostPhoto = { [weak self] in
+      let alert = UIAlertController(title: nil,
+                                    message: NSLocalizedString("photo.was.sent.alert.text", comment: "Photo was sent alert text"),
+                                    preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: NSLocalizedString("common.close", comment: "Close button title"),
+                                    style: .cancel, handler: nil))
+      self?.present(alert, animated: true, completion: nil)
+    }
+    
+    viewModel.onDidStartRequest = { [weak self] in
+      self?.activityIndicator.isHidden = false
+      self?.activityIndicator.startAnimating()
+      self?.descriptionContainerView.isHidden = true
+    }
+    
+    viewModel.onDidFinishRequest = { [weak self] in
+      self?.activityIndicator.isHidden = true
+      self?.activityIndicator.stopAnimating()
+      self?.descriptionContainerView.isHidden = false
     }
   }
   
@@ -153,7 +236,13 @@ class ShareViewController: UIViewController {
   private func showBottomSheet() {
     bottomSheet.snp.remakeConstraints { make in
       make.leading.trailing.equalToSuperview()
-      make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+      if #available(iOS 11.0, *) {
+        bottomSheetBottomConstraint = make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).constraint
+        make.top.greaterThanOrEqualTo(view.safeAreaLayoutGuide.snp.top)
+      } else {
+        bottomSheetBottomConstraint = make.bottom.equalToSuperview().constraint
+        make.top.greaterThanOrEqualToSuperview()
+      }
     }
     
     overlayView.isHidden = false
@@ -179,5 +268,41 @@ class ShareViewController: UIViewController {
       self.overlayView.isHidden = true
       self.isBottomSheetOpened = false
     })
+    
+    view.endEditing(true)
+  }
+  
+  // MARK: - Keyboard
+  
+  @objc func keyboardWillShow(notification: Notification) {
+      if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+        let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]) as? TimeInterval,
+        let curve = (notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey]) as? NSNumber {
+        if isBottomSheetOpened {
+          if #available(iOS 11.0, *) {
+            bottomSheetBottomConstraint?.update(offset: -(keyboardSize.height - view.safeAreaInsets.bottom))
+          } else {
+            bottomSheetBottomConstraint?.update(offset: -keyboardSize.height)
+          }
+          UIView.animate(withDuration: duration, delay: 0, options: [UIView.AnimationOptions(rawValue: UInt(curve.intValue))],
+                         animations: {
+            self.view.layoutSubviews()
+          }, completion: nil)
+        }
+      }
+
+  }
+
+  @objc func keyboardWillHide(notification: Notification) {
+      if let duration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]) as? TimeInterval,
+      let curve = (notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey]) as? NSNumber {
+          if isBottomSheetOpened {
+            bottomSheetBottomConstraint?.update(offset: 0)
+            UIView.animate(withDuration: duration, delay: 0, options: [UIView.AnimationOptions(rawValue: UInt(curve.intValue))],
+                           animations: {
+              self.view.layoutSubviews()
+            }, completion: nil)
+          }
+      }
   }
 }

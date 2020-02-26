@@ -18,3 +18,5 @@
 "select.photo.button.title" = "Выбрать фото";
 "bottom.sheet.title" = "Поделиться на стене";
 "send.button.title" = "Отправить";
+"comment.text.view.placeholder.text" = "Добавить комментарий";
+"photo.was.sent.alert.text" = "Фотография успешно опубликована!";

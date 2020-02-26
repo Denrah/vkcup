@@ -23,6 +23,6 @@ class TextView: UITextView {
     layer.cornerRadius = 18
     
     font = .systemFont(ofSize: 16)
-    contentInset = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+    textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
   }
 }

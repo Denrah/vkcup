@@ -24,6 +24,7 @@
 		84D554B623F7E6C5001617C1 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D554B523F7E6C5001617C1 /* MainCoordinator.swift */; };
 		84D554B823F7EA77001617C1 /* UIColor+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D554B723F7EA77001617C1 /* UIColor+AppColors.swift */; };
 		84D554BB23F7EE04001617C1 /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D554BA23F7EE04001617C1 /* StandardButton.swift */; };
+		92C0236F2405880900D9769D /* UploadToWallResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C0236E2405880900D9769D /* UploadToWallResponse.swift */; };
 		DD14ED40A803154F48018E37 /* Pods_VKCup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62B106B5D82C144831494507 /* Pods_VKCup.framework */; };
 		F7B5448D23FBA2C1003AE545 /* SharingBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5448C23FBA2C1003AE545 /* SharingBottomSheet.swift */; };
 		F7B5448F23FBB0AD003AE545 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7B5448E23FBB0AD003AE545 /* TextView.swift */; };
@@ -55,6 +56,7 @@
 		84D554B523F7E6C5001617C1 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		84D554B723F7EA77001617C1 /* UIColor+AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+AppColors.swift"; sourceTree = "<group>"; };
 		84D554BA23F7EE04001617C1 /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
+		92C0236E2405880900D9769D /* UploadToWallResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadToWallResponse.swift; sourceTree = "<group>"; };
 		F7B5448C23FBA2C1003AE545 /* SharingBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingBottomSheet.swift; sourceTree = "<group>"; };
 		F7B5448E23FBB0AD003AE545 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		F7B5449023FBBAD5003AE545 /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		844CBF4523F83D8600E334AA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				92C0236D240587F700D9769D /* VK Models */,
 				844CBF4623F83DD300E334AA /* VKService.swift */,
 				844CBF4823F83DF800E334AA /* AppDependency.swift */,
 			);
@@ -154,7 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				844CBF4223F8134500E334AA /* Common */,
-				84D554B023F7E12F001617C1 /* Protocols */,
 				84D554AF23F7E128001617C1 /* Extensions */,
 				84D554AE23F7E122001617C1 /* Scenes */,
 				844CBF4523F83D8600E334AA /* Services */,
@@ -191,13 +193,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		84D554B023F7E12F001617C1 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		84D554B423F7E699001617C1 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +210,14 @@
 				F7B5448E23FBB0AD003AE545 /* TextView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		92C0236D240587F700D9769D /* VK Models */ = {
+			isa = PBXGroup;
+			children = (
+				92C0236E2405880900D9769D /* UploadToWallResponse.swift */,
+			);
+			path = "VK Models";
 			sourceTree = "<group>";
 		};
 		C044C0092C44AF03A09F8F8A /* Frameworks */ = {
@@ -378,6 +381,7 @@
 				F7B5449123FBBAD5003AE545 /* ImagePickerCoordinator.swift in Sources */,
 				F7B5449623FBCD88003AE545 /* SharingBottomSheetViewModel.swift in Sources */,
 				844CBF4723F83DD300E334AA /* VKService.swift in Sources */,
+				92C0236F2405880900D9769D /* UploadToWallResponse.swift in Sources */,
 				F7B5448F23FBB0AD003AE545 /* TextView.swift in Sources */,
 				844CBF4123F806C700E334AA /* AuthViewModel.swift in Sources */,
 				844CBF3F23F8055000E334AA /* AuthCoordinator.swift in Sources */,
@@ -452,7 +456,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -506,7 +510,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
